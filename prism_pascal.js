@@ -2,7 +2,7 @@ Prism.languages.pascal = {
   directive:
   {
     pattern: /\{\$[\s\S]*?\}/,
-    greedy: !0,
+    greedy: true,
     alias: ["marco", "property"]
   },
   comment:
@@ -19,7 +19,7 @@ Prism.languages.pascal = {
   {
     pattern: /(\basm\b)[\s\S]+?(?=\bend\s*[;[])/i,
     lookbehind: true,
-    greedy: !0,
+    greedy: true,
     inside: null
   },
   keyword: [
@@ -28,34 +28,34 @@ Prism.languages.pascal = {
     lookbehind: true
   },
   {
-    pattern: /(^|[^&])\b(?:absolute|abstract|alias|assembler|bitpacked|break|cdecl|continue|cppdecl|cvar|default|deprecated|dynamic|enumerator|experimental|export|external|far|far16|forward|generic|helper|implements|index|interrupt|iochecks|local|message|name|near|nodefault|noreturn|nostackframe|oldfpccall|otherwise|overload|override|platform|private|protected|public|published|read(?:ln)?|register|reintroduce|result|safecall|saveregisters|soft|float|specialize|static|stdcall|stored|strict|unaligned|unimplemented|varargs|virtual|write(?:ln)?|and|as|div|exclude|in|include|is|mod|not|or|shl|shr|xor)\b/i,
+    pattern: /(^|[^&])\b(?:absolute|abstract|alias|assembler|bitpacked|break|cdecl|continue|cppdecl|cvar|default|deprecated|dynamic|enumerator|experimental|export|external|far|far16|forward|generic|helper|implements|index|interrupt|iochecks|local|message|name|near|nodefault|noreturn|nostackframe|oldfpccall|otherwise|overload|override|platform|private|protected|public|published|read(?:ln)?|register|reintroduce|result|safecall|saveregisters|soft|float|specialize|static|stdcall|stored|strict|unaligned|unimplemented|varargs|virtual|write(?:ln)?|and|as|exclude|in|include|is|not|or|shl|shr|xor)\b/i,
     lookbehind: true
   }],
   function: [
   {
-    pattern: /(^|[^&])\b(?:sin|cos|sqrt|length|exp|tan|keyPressed|readKey|delay|random|randomize|inc|dec|ceil|trunc|frac|floor|abs|round|sqr|pred|succ|ln|arctan|int|halt|odd|ord)\b/i,
+    pattern: /(^|[^&])\b(?:sin|cos|sqrt|length|exp|tan|keyPressed|readKey|delay|random|randomize|inc|dec|ceil|trunc|frac|floor|abs|round|sqr|pred|succ|ln|arctan|int|halt|odd|ord|chr)\b/i,
     lookbehind: true
-  }],
-  'function-definition':
+  },
   {
     pattern: /(\bfunction\s+)[a-z_]\w*(?=\s*\()/i,
-    lookbehind: true,
-    alias: 'function'
+    lookbehind: true
   },
-  'function-defined':
   {
     pattern: /(^|[^\\\w])\\?[a-z_](?:[\w\\]*\w)?(?=\s*\()/i,
     lookbehind: true,
-    alias: 'function',
     inside:
     {
       'punctuation': /\\/
     }
-  },
+  }],
   number: [/(?:[&%]\d+|\$[a-f\d]+)/i, /\b\d+(?:\.\d+)?(?:e[+-]?\d+)?/i],
-  // highlight punctuation, operators, symbols, braces as properties
-  // TODO: highlight punctuation with it is token
-  property: [/\(\.|\.\)|[+\-'*=<>\/\[\];:)(@\^,.]/],
+  punctuation: [/\(\.|\.\)|[,.]/],
+  // highlight operators, symbols, braces as properties
+  property: [
+  {
+    pattern: /[+\-'*=<>;:\/\[\])(@\^]|(^|[^&])\b(?:mod|div)\b/i,
+    lookbehind: true
+  }],
 }, Prism.languages.pascal.asm.inside = Prism.languages.extend("pascal",
 {
   asm: void 0,
