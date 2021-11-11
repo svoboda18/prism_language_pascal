@@ -41,21 +41,17 @@ Prism.languages.pascal = {
     lookbehind: true
   },
   {
-    pattern: /(^|[^\\\w])\\?[a-z_](?:[\w\\]*\w)?(?=\s*\()/i,
-    lookbehind: true,
-    inside:
-    {
-      'punctuation': /\\/
-    }
-  }],
-  number: [/(?:[&%]\d+|\$[a-f\d]+)/i, /\b\d+(?:\.\d+)?(?:e[+-]?\d+)?/i],
-  punctuation: [/\(\.|\.\)|[,.]/],
-  // highlight operators, symbols, braces as properties
-  property: [
-  {
-    pattern: /[+\-'*=<>;:\/\[\])(@\^]|(^|[^&])\b(?:mod|div)\b/i,
+    pattern: /(^|[^\w])(?<!\)\s)[a-z_](?:[\w]*\w)?(?=\s*\()/i,
     lookbehind: true
   }],
+  number: [/(?:[&%]\d+|\$[a-f\d]+)/i, /\b\d+(?:\.\d+)?(?:e[+-]?\d+)?/i],
+  // highlight operators, symbols, braces as properties
+  punctuation: [/\(\.|\.\)|[;.]/], 
+  property: [
+{
+      pattern: /[+'*=<>,\/\[\])(@\^-]|(?::=)|(^|[^&])\b(?:mod|div)\b/i,
+      lookbehind: true
+    }],
 }, Prism.languages.pascal.asm.inside = Prism.languages.extend("pascal",
 {
   asm: void 0,
